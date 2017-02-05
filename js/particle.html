@@ -1,0 +1,83 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>gravity</title>
+        <script>
+            window.onload = function() {
+                var canvas = document.createElement("canvas"),
+                ctx = canvas.getContext("2d"),
+                parts = {},
+                index = 0,
+                partNum = 10;
+
+                canvas.width = 400;
+                canvas.height = 400;
+
+                document.body.appendChild(canvas);
+
+                window.requestAnimFrame = 
+                window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    return window.setTimeout(callback, 1000/60);
+                }
+
+
+                function Particle () {
+                    this.posX = canvas.width/2;
+                    this.posY = canvas.height/2;
+                    this.velX = Math.random() * 10 - 5;
+                    this.velY = Math.random() * 10 - 5;
+                    this.gravity = 0.1;
+                    index++;
+                    parts[index] = this;
+                    this.id = index;
+                    this.life = 0;
+                    this.maxlife = Math.random() * 30+50;
+                    this.color = "rgba("+parseInt(Math.random() * 255, 10)+","+parseInt(Math.random() * 255, 10)+","+parseInt(Math.random() * 255, 10)+", 0.5)"
+
+                }
+
+                Particle.prototype.draw = function () {
+                    this.posX += this.velX;
+                    this.posY += this.velY;
+                    if (Math.random() < 0.1) {
+                        this.velX = Math.random() * 10 -5
+                        this.velY = Math.random() * 10 -5
+                    
+                    }
+                    // this.velY += this.gravity;
+                    this.life++;
+                    if (this.life >= this.maxlife) {
+                        delete parts[this.id];
+                    }
+                    ctx.fillStyle =this.color;
+                    ctx.fillRect(this.posX, this.posY, 10, 10);
+                }
+
+                for (var i = 0; i < partNum; i++) {
+                    new Particle();
+                }
+                (function loop () {
+                    ctx.globalCompositeOperation = "source-over";
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);  
+                    for (var i = 0; i < partNum; i++) {
+                        new Particle();
+                    }
+                    ctx.globalCompositeOperation = "lighter";                
+                    for (var i in parts) {
+                        parts[i].draw();
+                    }
+                    requestAnimFrame(loop);
+                })();
+            };
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

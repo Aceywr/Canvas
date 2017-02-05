@@ -74,11 +74,11 @@ for (var i = 0; i<100/hw; i++) {
 
 
             
-function Loop () {
+(function Loop () {
     maprender();
    for (var i = 0; i<100/hw; i++) {
        arr[i].update();
    }
     requestAnimFrame(Loop);
-}      
-Loop();
+})();      
+
