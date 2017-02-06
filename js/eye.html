@@ -6,7 +6,8 @@
         <script>
             window.onload = function() {
                 var canvas = document.createElement("canvas"),
-                ctx = canvas.getContext("2d");
+                ctx = canvas.getContext("2d"),
+                rot = 0;
 
                 canvas.width = 410;
                 canvas.height = 410;
@@ -23,21 +24,58 @@
                 window.msRequestAnimationFrame ||
                 function (callback) {
                     return window.setTimeout(callback, 1000/60);
-                }
+                };
 
-                ctx.fillStyle = "black";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
 
-                ctx.translate(200, 200);
-                ctx.beginPath();
-                ctx.arc(0, 0, 200, 0,Math.PI * 2);
-                ctx.strokeStyle = "#fff";
-                ctx.stroke();
+               
+               
                 
 
                 (function loop () {
-                   
-                    
+                    ctx.fillStyle = "#fff";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.save();
+
+                    ctx.translate(200, 200);
+                    ctx.scale(0.5,0.5);
+                    ctx.rotate(rot*Math.PI/180);
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 350, 0,Math.PI * 2);
+                    ctx.fillStyle = "#000";
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 320, 0,Math.PI * 2);
+                    ctx.fillStyle = "red";
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 200, 0,Math.PI * 2);
+                    ctx.fillStyle = "#000";
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 170, 0,Math.PI * 2);
+                    ctx.fillStyle = "red";
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(160, -92.5, 40, 0, Math.PI * 2);
+                    ctx.fillStyle = "#000";
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(-160, -92.5, 40, 0, Math.PI * 2);
+                    ctx.fillStyle = "#000";
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(0, 185, 40, 0, Math.PI * 2);
+                    ctx.fillStyle = "#000";
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 40, 0, Math.PI * 2);
+                    ctx.fillStyle = "#000";
+                    ctx.fill();
+                    ctx.restore();
+                    rot++;
+
+
                     requestAnimFrame(loop);
                 })();
             };

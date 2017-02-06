@@ -1,0 +1,49 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>rotate</title>
+        <script>
+            window.onload = function() {
+                var canvas = document.createElement("canvas"),
+                ctx = canvas.getContext("2d"),
+                rot = 0;
+
+                canvas.width = 400;
+                canvas.height = 400;
+
+                document.body.appendChild(canvas);
+
+               
+
+                window.requestAnimFrame = 
+                window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    return window.setTimeout(callback, 1000/60);
+                };
+
+        
+            
+
+                (function loop () {
+                    ctx.fillStyle = "rgba(0,0,0,0.03)";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height); 
+                    ctx.save();
+                    ctx.translate(200,200); 
+                    ctx.fillStyle ="#fff";
+                    ctx.rotate(rot*Math.PI/180);
+                    ctx.fillRect(-100, -100, 200, 200);
+                    ctx.restore();
+                    rot++;
+                    requestAnimFrame(loop);
+                })();
+            };
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

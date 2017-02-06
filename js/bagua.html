@@ -6,7 +6,8 @@
         <script>
             window.onload = function() {
                 var canvas = document.createElement("canvas"),
-                ctx = canvas.getContext("2d");
+                ctx = canvas.getContext("2d"),
+                rot = 0;
 
                 canvas.width = 410;
                 canvas.height = 410;
@@ -14,13 +15,24 @@
 
                 document.body.appendChild(canvas);
 
-                    
-                    
-                    ctx.fillStyle = "black";
+                window.requestAnimFrame = 
+                window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    return window.setTimeout(callback, 1000/60);
+                };
+
+
+                 (function loop () {
+                    ctx.fillStyle = "#000";
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.translate(200, 200); 
-                    ctx.scale(0.5,0.5);   
-                    ctx.rotate(this.rot * Math.PI/180);
+                    ctx.save();
+                    ctx.translate(200,200);
+                    ctx.scale(0.5,0.5);
+                    ctx.rotate(rot*Math.PI/180);
                     ctx.beginPath();
                     ctx.arc(100, 0, 100, 0,  Math.PI, true);
                     ctx.fillStyle = "#fff";
@@ -45,20 +57,12 @@
                     ctx.arc(100, 0, 25, 0,  Math.PI * 2, true);
                     ctx.fillStyle = "#000";
                     ctx.fill();
-                    
+                    ctx.restore();
+                    rot-=5;
+                    requestAnimFrame(loop);
+                })();
 
 
-                 
-                
-
-               
-                    
-
-                  
-                    
-
-                    
-               
             };
         </script>
     </head>
