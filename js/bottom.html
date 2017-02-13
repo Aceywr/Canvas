@@ -1,0 +1,97 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>gravity</title>
+        <style>
+            body {
+                margin: 0;
+            }
+        </style>
+        <script>
+            window.onload = function() {
+                var canvas = document.createElement("canvas"),
+                ctx = canvas.getContext("2d");
+
+                var gravity = 1; //重力
+
+                var arr = Array(); //物体存放数组
+                var i = 0; //物体数量
+
+                canvas.width = 400;
+                canvas.height = 400;
+
+                document.body.appendChild(canvas);
+
+               
+                
+                window.requestAnimFrame = 
+                window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    return window.setTimeout(callback, 1000/60);
+                }
+
+               
+
+
+                var Obj  = function (posX, posY) {
+                    this.posX = posX;
+                    this.posY = posY;
+                    this.velX = 0;
+                    this.velY = -10;
+                };
+
+                Obj.prototype.create = function () {
+                    ctx.fillStyle ="#fff";
+                    ctx.fillRect(this.posX, this.posY, 10, 10);
+                };
+                
+                Obj.prototype.move = function () {
+                    this.posX += this.velX;
+                    this.posY += this.velY;
+                };
+                Obj.prototype.velupdate = function () {
+                    this.velY += gravity;
+                };
+                Obj.prototype.collision = function () {
+                    if (this.posY > 300) {
+                        this.velY *= -0.7;
+                        this.velX *= 0.7;
+                        this.posY = 300;
+                    }
+                };
+
+                 canvas.onclick = function(e) {
+                    i++;
+                    var e = e || window.event;
+                    var x = e.pageX || (e.clientX +
+                        (document.documentElement.scrollLeft
+                        || document.body.scrollLeft));
+                    var y= e.pageY || (e.clientY +
+                        (document.documentElement.scrollTop
+                        || document.body.scrollTop));
+                    arr[i] = new Obj(x, y);  
+                 };
+
+                
+                (function loop () {
+                    ctx.fillStyle = "black";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    for (var n = 1; n<arr.length; n++) {
+                        arr[n].move();
+                        arr[n].collision();
+                        arr[n].velupdate();
+                        arr[n].create();
+                    };
+                    requestAnimFrame(loop);
+                })();
+            };
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

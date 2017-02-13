@@ -7,7 +7,8 @@
             window.onload = function() {
                 var canvas = document.createElement("canvas"),
                 ctx = canvas.getContext("2d"),
-                rot = 0;
+                rot = 0,
+                m = 3/4;
 
                 canvas.width = 410;
                 canvas.height = 410;
@@ -40,6 +41,7 @@
                     ctx.translate(200, 200);
                     ctx.scale(0.5,0.5);
                     ctx.rotate(rot*Math.PI/180);
+                    // 外圈
                     ctx.beginPath();
                     ctx.arc(0, 0, 350, 0,Math.PI * 2);
                     ctx.fillStyle = "#000";
@@ -48,6 +50,7 @@
                     ctx.arc(0, 0, 320, 0,Math.PI * 2);
                     ctx.fillStyle = "red";
                     ctx.fill();
+                    // 内圈
                     ctx.beginPath();
                     ctx.arc(0, 0, 200, 0,Math.PI * 2);
                     ctx.fillStyle = "#000";
@@ -56,22 +59,36 @@
                     ctx.arc(0, 0, 170, 0,Math.PI * 2);
                     ctx.fillStyle = "red";
                     ctx.fill();
-                    ctx.beginPath();
-                    ctx.arc(160, -92.5, 40, 0, Math.PI * 2);
-                    ctx.fillStyle = "#000";
-                    ctx.fill();
-                    ctx.beginPath();
-                    ctx.arc(-160, -92.5, 40, 0, Math.PI * 2);
-                    ctx.fillStyle = "#000";
-                    ctx.fill();
-                    ctx.beginPath();
-                    ctx.arc(0, 185, 40, 0, Math.PI * 2);
-                    ctx.fillStyle = "#000";
-                    ctx.fill();
+                     // 中心
                     ctx.beginPath();
                     ctx.arc(0, 0, 40, 0, Math.PI * 2);
                     ctx.fillStyle = "#000";
                     ctx.fill();
+                    // 勾玉
+                    ctx.translate(160, -92.5);
+                    ctx.scale(0.4,0.4);
+                    ctx.rotate(5*rot*Math.PI/180);
+                    ctx.beginPath();
+                    ctx.arc((100*m)-100, 0, 100, Math.PI * m, 0);
+                    
+                    ctx.arc(0, 0, 100 * m, 0, Math.PI );
+                   
+                    ctx.arc((100*m)-60, 62, 110,Math.PI*1.2, Math.PI*0.975, true);
+                    ctx.fillStyle = "#000";
+                    ctx.fill();
+
+                    // ctx.arc(160, -92.5, 40, 0, Math.PI * 2);
+                    // ctx.fillStyle = "#000";
+                    // ctx.fill();
+                    // ctx.beginPath();
+                    // ctx.arc(-160, -92.5, 40, 0, Math.PI * 2);
+                    // ctx.fillStyle = "#000";
+                    // ctx.fill();
+                    // ctx.beginPath();
+                    // ctx.arc(0, 185, 40, 0, Math.PI * 2);
+                    // ctx.fillStyle = "#000";
+                    // ctx.fill();
+                   
                     ctx.restore();
                     rot++;
 
