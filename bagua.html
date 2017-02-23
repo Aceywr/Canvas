@@ -33,32 +33,45 @@
                     ctx.translate(200,200);
                     ctx.scale(0.5,0.5);
                     ctx.rotate(rot*Math.PI/180);
+
+                    // ctx.beginPath();
+                    // ctx.arc(100, 0, 100, 0,  Math.PI, true);
+                    // ctx.fillStyle = "#fff";
+                    // ctx.fill();
+                    // ctx.beginPath();
+                    // ctx.arc(0, 0, 200, 0,  Math.PI);
+                    // ctx.filllStyle = "#fff";
+                    // ctx.fill();
+                    // ctx.beginPath();
+                    // ctx.arc(-100, 0, 100, 0,  Math.PI);
+                    // ctx.fillStyle = "#000";
+                    // ctx.fill();
+                   
+                    // ctx.beginPath();
+                    // ctx.arc(0, 0, 200, 0,  Math.PI,true);
+                    // ctx.strokeStyle = "#fff";
+                    // ctx.stroke();
+                    
                     ctx.beginPath();
-                    ctx.arc(100, 0, 100, 0,  Math.PI, true);
+                    ctx.arc(0, 0, 200, 0,  Math.PI);
+                    ctx.arc(-100, 0, 100, Math.PI,  0);
+                    ctx.arc(100, 0, 100, Math.PI, 0, true);
                     ctx.fillStyle = "#fff";
                     ctx.fill();
                     ctx.beginPath();
-                    ctx.arc(0, 0, 200, 0,  Math.PI);
-                    ctx.filllStyle = "#fff";
-                    ctx.fill();
-                    ctx.beginPath();
-                    ctx.arc(-100, 0, 100, 0,  Math.PI);
+                    ctx.arc(-100, 0, 25, 0,  Math.PI * 2);
                     ctx.fillStyle = "#000";
                     ctx.fill();
                     ctx.beginPath();
-                    ctx.arc(-100, 0, 25, 0,  Math.PI * 2);
+                    ctx.arc(100, 0, 25, 0,  Math.PI * 2, true);
                     ctx.fillStyle = "#fff";
                     ctx.fill();
                     ctx.beginPath();
                     ctx.arc(0, 0, 200, 0,  Math.PI,true);
                     ctx.strokeStyle = "#fff";
                     ctx.stroke();
-                    ctx.beginPath();
-                    ctx.arc(100, 0, 25, 0,  Math.PI * 2, true);
-                    ctx.fillStyle = "#000";
-                    ctx.fill();
                     ctx.restore();
-                    rot-=5;
+                    rot+=5;
                     requestAnimFrame(loop);
                 })();
 
